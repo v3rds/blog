@@ -16,13 +16,17 @@ class PostsController extends Controller
       }
 
 
-    public function index()
+    public function index(\App\Repositories\Posts $post)
       {
         // $posts = Post::latest()->get();
 
-        $posts = \App\Post::latest()
-          ->filter(request(['month','year']))
-          ->get();
+        // dd($post);
+        $posts = $post->all();
+        // $posts = (new \App\Repositories\Posts)->all();
+
+        // $posts = \App\Post::latest()
+        //   ->filter(request(['month','year']))
+        //   ->get();
 
         return view('posts.index', compact('posts'));
       }
